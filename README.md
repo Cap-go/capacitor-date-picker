@@ -27,6 +27,12 @@ This is Capgo's maintained alternative to `@capacitor-community/date-picker`. Th
 - Minute steps for time pickers.
 - Range selection via `presentRange()`.
 
+## Demo
+
+| iOS | Android |
+| --- | --- |
+| <img src="https://raw.githubusercontent.com/Cap-go/capacitor-date-picker/main/screenshots/demo/ios-date-picker-demo.webp" alt="Animated iOS demo showing the native date picker opening, selecting a date, and closing" width="320" /> | <img src="https://raw.githubusercontent.com/Cap-go/capacitor-date-picker/main/screenshots/demo/android-date-picker-demo.webp" alt="Animated Android demo showing the native date picker opening, selecting a date, and closing" width="320" /> |
+
 ## Screenshots
 
 | iOS | Android |
