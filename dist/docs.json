@@ -1,0 +1,356 @@
+{
+  "api": {
+    "name": "DatePickerPlugin",
+    "slug": "datepickerplugin",
+    "docs": "",
+    "tags": [],
+    "methods": [
+      {
+        "name": "present",
+        "signature": "(options?: DatePickerOptions | undefined) => Promise<DatePickerResult>",
+        "parameters": [
+          {
+            "name": "options",
+            "docs": "",
+            "type": "DatePickerOptions | undefined"
+          }
+        ],
+        "returns": "Promise<DatePickerResult>",
+        "tags": [],
+        "docs": "Present the date picker.",
+        "complexTypes": [
+          "DatePickerResult",
+          "DatePickerOptions"
+        ],
+        "slug": "present"
+      },
+      {
+        "name": "presentRange",
+        "signature": "(options?: DatePickerRangeOptions | undefined) => Promise<DatePickerRangeResult>",
+        "parameters": [
+          {
+            "name": "options",
+            "docs": "",
+            "type": "DatePickerRangeOptions | undefined"
+          }
+        ],
+        "returns": "Promise<DatePickerRangeResult>",
+        "tags": [],
+        "docs": "Present a range picker. Native platforms use two native date selections;\nweb shows start and end controls in one dialog.",
+        "complexTypes": [
+          "DatePickerRangeResult",
+          "DatePickerRangeOptions"
+        ],
+        "slug": "presentrange"
+      },
+      {
+        "name": "hide",
+        "signature": "() => Promise<void>",
+        "parameters": [],
+        "returns": "Promise<void>",
+        "tags": [],
+        "docs": "Close the currently visible picker, if any.",
+        "complexTypes": [],
+        "slug": "hide"
+      },
+      {
+        "name": "getPluginVersion",
+        "signature": "() => Promise<PluginVersionResult>",
+        "parameters": [],
+        "returns": "Promise<PluginVersionResult>",
+        "tags": [],
+        "docs": "Returns the platform implementation version marker.",
+        "complexTypes": [
+          "PluginVersionResult"
+        ],
+        "slug": "getpluginversion"
+      }
+    ],
+    "properties": []
+  },
+  "interfaces": [
+    {
+      "name": "DatePickerResult",
+      "slug": "datepickerresult",
+      "docs": "",
+      "tags": [],
+      "methods": [],
+      "properties": [
+        {
+          "name": "value",
+          "tags": [],
+          "docs": "Formatted value. Null means the picker was dismissed.",
+          "complexTypes": [],
+          "type": "string | null"
+        }
+      ]
+    },
+    {
+      "name": "DatePickerOptions",
+      "slug": "datepickeroptions",
+      "docs": "",
+      "tags": [],
+      "methods": [],
+      "properties": [
+        {
+          "name": "min",
+          "tags": [],
+          "docs": "Minimum selectable value.",
+          "complexTypes": [],
+          "type": "string | undefined"
+        },
+        {
+          "name": "max",
+          "tags": [],
+          "docs": "Maximum selectable value.",
+          "complexTypes": [],
+          "type": "string | undefined"
+        },
+        {
+          "name": "date",
+          "tags": [],
+          "docs": "Initial selected value.",
+          "complexTypes": [],
+          "type": "string | undefined"
+        },
+        {
+          "name": "ios",
+          "tags": [],
+          "docs": "Platform-specific iOS options override top-level options.",
+          "complexTypes": [
+            "DatePickerIosOptions"
+          ],
+          "type": "DatePickerIosOptions"
+        },
+        {
+          "name": "android",
+          "tags": [],
+          "docs": "Platform-specific Android options override top-level options.",
+          "complexTypes": [
+            "DatePickerAndroidOptions"
+          ],
+          "type": "DatePickerAndroidOptions"
+        }
+      ]
+    },
+    {
+      "name": "DatePickerIosOptions",
+      "slug": "datepickeriosoptions",
+      "docs": "",
+      "tags": [],
+      "methods": [],
+      "properties": [
+        {
+          "name": "style",
+          "tags": [
+            {
+              "text": "\"inline\"",
+              "name": "default"
+            }
+          ],
+          "docs": "iOS picker style.",
+          "complexTypes": [
+            "DatePickerIosStyle"
+          ],
+          "type": "DatePickerIosStyle"
+        },
+        {
+          "name": "titleFontColor",
+          "tags": [],
+          "docs": "",
+          "complexTypes": [],
+          "type": "string | undefined"
+        },
+        {
+          "name": "titleBgColor",
+          "tags": [],
+          "docs": "",
+          "complexTypes": [],
+          "type": "string | undefined"
+        },
+        {
+          "name": "bgColor",
+          "tags": [],
+          "docs": "",
+          "complexTypes": [],
+          "type": "string | undefined"
+        },
+        {
+          "name": "fontColor",
+          "tags": [],
+          "docs": "",
+          "complexTypes": [],
+          "type": "string | undefined"
+        },
+        {
+          "name": "buttonBgColor",
+          "tags": [],
+          "docs": "",
+          "complexTypes": [],
+          "type": "string | undefined"
+        },
+        {
+          "name": "buttonFontColor",
+          "tags": [],
+          "docs": "",
+          "complexTypes": [],
+          "type": "string | undefined"
+        },
+        {
+          "name": "mergedDateAndTime",
+          "tags": [],
+          "docs": "Show date and time in one UIDatePicker when possible.",
+          "complexTypes": [],
+          "type": "boolean | undefined"
+        }
+      ]
+    },
+    {
+      "name": "DatePickerAndroidOptions",
+      "slug": "datepickerandroidoptions",
+      "docs": "",
+      "tags": [],
+      "methods": [],
+      "properties": [
+        {
+          "name": "theme",
+          "tags": [],
+          "docs": "Android dialog theme resource name or built-in theme key.",
+          "complexTypes": [
+            "DatePickerTheme"
+          ],
+          "type": "DatePickerTheme"
+        }
+      ]
+    },
+    {
+      "name": "DatePickerRangeResult",
+      "slug": "datepickerrangeresult",
+      "docs": "",
+      "tags": [],
+      "methods": [],
+      "properties": [
+        {
+          "name": "start",
+          "tags": [],
+          "docs": "Formatted start value. Null means the picker was dismissed.",
+          "complexTypes": [],
+          "type": "string | null"
+        },
+        {
+          "name": "end",
+          "tags": [],
+          "docs": "Formatted end value. Null means the picker was dismissed.",
+          "complexTypes": [],
+          "type": "string | null"
+        },
+        {
+          "name": "value",
+          "tags": [],
+          "docs": "Convenience \"start/end\" value when both dates are selected.",
+          "complexTypes": [],
+          "type": "string | null"
+        }
+      ]
+    },
+    {
+      "name": "DatePickerRangeOptions",
+      "slug": "datepickerrangeoptions",
+      "docs": "",
+      "tags": [],
+      "methods": [],
+      "properties": [
+        {
+          "name": "start",
+          "tags": [],
+          "docs": "Initial range start value.",
+          "complexTypes": [],
+          "type": "string | undefined"
+        },
+        {
+          "name": "end",
+          "tags": [],
+          "docs": "Initial range end value.",
+          "complexTypes": [],
+          "type": "string | undefined"
+        },
+        {
+          "name": "startTitle",
+          "tags": [],
+          "docs": "Title used while choosing the start date.",
+          "complexTypes": [],
+          "type": "string | undefined"
+        },
+        {
+          "name": "endTitle",
+          "tags": [],
+          "docs": "Title used while choosing the end date.",
+          "complexTypes": [],
+          "type": "string | undefined"
+        }
+      ]
+    },
+    {
+      "name": "PluginVersionResult",
+      "slug": "pluginversionresult",
+      "docs": "",
+      "tags": [],
+      "methods": [],
+      "properties": [
+        {
+          "name": "version",
+          "tags": [],
+          "docs": "",
+          "complexTypes": [],
+          "type": "string"
+        }
+      ]
+    }
+  ],
+  "enums": [],
+  "typeAliases": [
+    {
+      "name": "DatePickerIosStyle",
+      "slug": "datepickeriosstyle",
+      "docs": "",
+      "types": [
+        {
+          "text": "'wheels'",
+          "complexTypes": []
+        },
+        {
+          "text": "'inline'",
+          "complexTypes": []
+        },
+        {
+          "text": "'compact'",
+          "complexTypes": []
+        },
+        {
+          "text": "'automatic'",
+          "complexTypes": []
+        }
+      ]
+    },
+    {
+      "name": "DatePickerTheme",
+      "slug": "datepickertheme",
+      "docs": "",
+      "types": [
+        {
+          "text": "'light'",
+          "complexTypes": []
+        },
+        {
+          "text": "'dark'",
+          "complexTypes": []
+        },
+        {
+          "text": "string",
+          "complexTypes": []
+        }
+      ]
+    }
+  ],
+  "pluginConfigs": []
+}
