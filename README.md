@@ -23,8 +23,15 @@ This is Capgo's maintained alternative to `@capacitor-community/date-picker`. Th
 - Android `is24h`.
 - Android dateAndTime keeps the chosen date when moving to time.
 - Android dialog width/layout handling.
+- Android UI-thread dialog handling so native dialogs open reliably from Capacitor calls.
 - Minute steps for time pickers.
 - Range selection via `presentRange()`.
+
+## Screenshots
+
+| iOS | Android |
+| --- | --- |
+| <img src="https://raw.githubusercontent.com/Cap-go/capacitor-date-picker/main/screenshots/ios-date-picker.png" alt="iOS native date picker" width="320" /> | <img src="https://raw.githubusercontent.com/Cap-go/capacitor-date-picker/main/screenshots/android-date-picker.png" alt="Android native date picker" width="320" /> |
 
 ## Install
 

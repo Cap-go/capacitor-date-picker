@@ -6,6 +6,7 @@ import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.res.Configuration;
+import android.view.ContextThemeWrapper;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -27,8 +28,8 @@ class DatePicker {
     DatePicker(DatePickerOptions options, Context context) {
         this.options = options;
         this.context = context;
-        this.localizedContext = localizedContext(context, options.localeValue());
         this.theme = DatePickerTheme.get(options.theme, context);
+        this.localizedContext = localizedContext(context, options.localeValue(), theme);
     }
 
     void open(DatePickerCallback callback) {
@@ -287,10 +288,12 @@ class DatePicker {
         return calendar;
     }
 
-    private Context localizedContext(Context base, Locale locale) {
+    private Context localizedContext(Context base, Locale locale, int theme) {
         Configuration configuration = new Configuration(base.getResources().getConfiguration());
         configuration.setLocale(locale);
-        return base.createConfigurationContext(configuration);
+        ContextThemeWrapper wrapper = new ContextThemeWrapper(base, theme);
+        wrapper.applyOverrideConfiguration(configuration);
+        return wrapper;
     }
 
     private Date latest(Date first, Date second) {

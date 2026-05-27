@@ -1,5 +1,6 @@
 package app.capgo.datepicker;
 
+import android.app.Activity;
 import com.getcapacitor.JSObject;
 import com.getcapacitor.Plugin;
 import com.getcapacitor.PluginCall;
@@ -30,11 +31,13 @@ public class DatePickerPlugin extends Plugin {
 
     @PluginMethod
     public void hide(PluginCall call) {
-        if (activePicker != null) {
-            activePicker.dismissActive(true);
-            activePicker = null;
-        }
-        call.resolve();
+        runOnUiThread(call, () -> {
+            if (activePicker != null) {
+                activePicker.dismissActive(true);
+                activePicker = null;
+            }
+            call.resolve();
+        });
     }
 
     @PluginMethod
@@ -45,18 +48,40 @@ public class DatePickerPlugin extends Plugin {
     }
 
     private void open(PluginCall call, boolean range) {
+        runOnUiThread(call, () -> openOnUiThread(call, range));
+    }
+
+    private void openOnUiThread(PluginCall call, boolean range) {
         try {
             if (activePicker != null) {
                 activePicker.dismissActive(true);
                 activePicker = null;
             }
 
+            Activity activity = getActivity();
+            if (activity == null || activity.isFinishing() || activity.isDestroyed()) {
+                call.reject("Unable to access a running Android activity");
+                return;
+            }
+
             DatePickerOptions callOptions = options.copyWithCall(call, range);
-            activePicker = new DatePicker(callOptions, getActivity());
+            activePicker = new DatePicker(callOptions, activity);
             activePicker.open(new Callback(call, range));
         } catch (ParseException exception) {
             call.reject(exception.getMessage());
+        } catch (RuntimeException exception) {
+            activePicker = null;
+            call.reject(exception.getMessage());
         }
+    }
+
+    private void runOnUiThread(PluginCall call, Runnable action) {
+        Activity activity = getActivity();
+        if (activity == null || activity.isFinishing() || activity.isDestroyed()) {
+            call.reject("Unable to access a running Android activity");
+            return;
+        }
+        activity.runOnUiThread(action);
     }
 
     private final class Callback implements DatePickerCallback {
