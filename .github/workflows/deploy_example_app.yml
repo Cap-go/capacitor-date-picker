@@ -117,6 +117,14 @@ jobs:
             echo "__CAPGO_COMMENT__"
           } >> "$GITHUB_OUTPUT"
 
+      - name: Ensure Capgo app exists
+        working-directory: example-app
+        run: |
+          bunx @capgo/cli@7 app add app.capgo.datepicker.example \
+            --name "Capgo Date Picker Example" || true
+        env:
+          CAPGO_TOKEN: ${{ secrets.CAPGO_TOKEN }}
+
       - name: Deploy to Capgo
         working-directory: example-app
         run: |
