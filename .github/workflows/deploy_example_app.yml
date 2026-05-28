@@ -121,7 +121,12 @@ jobs:
         working-directory: example-app
         run: |
           bunx @capgo/cli@7 app add app.capgo.datepicker.example \
-            --name "Capgo Date Picker Example" || true
+            --name "Capgo Date Picker Example" \
+            --icon ./resources/icon.png || true
+
+          bunx @capgo/cli@7 app set app.capgo.datepicker.example \
+            --name "Capgo Date Picker Example" \
+            --icon ./resources/icon.png
         env:
           CAPGO_TOKEN: ${{ secrets.CAPGO_TOKEN }}
 
