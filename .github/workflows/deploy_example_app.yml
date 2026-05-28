@@ -123,12 +123,18 @@ jobs:
           bunx @capgo/cli@7 app add app.capgo.datepicker.example \
             --name "Capgo Date Picker Example" \
             --icon ./resources/icon.png || true
+        env:
+          CAPGO_TOKEN: ${{ secrets.CAPGO_TOKEN }}
 
+      - name: Update Capgo app icon
+        continue-on-error: true
+        working-directory: example-app
+        run: |
           bunx @capgo/cli@7 app set app.capgo.datepicker.example \
             --name "Capgo Date Picker Example" \
             --icon ./resources/icon.png
         env:
-          CAPGO_TOKEN: ${{ secrets.CAPGO_TOKEN }}
+          CAPGO_TOKEN: ${{ secrets.CAPGO_ADMIN_TOKEN || secrets.CAPGO_TOKEN }}
 
       - name: Deploy to Capgo
         working-directory: example-app
