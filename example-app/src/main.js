@@ -1,5 +1,6 @@
 import './style.css';
 import { DatePicker } from '@capgo/capacitor-date-picker';
+import { CapacitorUpdater } from '@capgo/capacitor-updater';
 
 const output = document.getElementById('plugin-output');
 const dateButton = document.getElementById('pick-date');
@@ -59,3 +60,7 @@ rangeButton.addEventListener('click', () =>
 
 hideButton.addEventListener('click', () => run(() => DatePicker.hide()));
 versionButton.addEventListener('click', () => run(() => DatePicker.getPluginVersion()));
+
+void CapacitorUpdater.notifyAppReady().catch((error) => {
+  console.error('CapacitorUpdater.notifyAppReady failed', error);
+});
