@@ -103,10 +103,11 @@ jobs:
             exit 1
           fi
 
-          bundle="$package_version"
+          sha="${GITHUB_SHA:-local}"
+          bundle="$package_version-${sha:0:7}"
 
           if [[ -z "$comment" ]]; then
-            comment="Date Picker example $package_version"
+            comment="Date Picker example $bundle"
           fi
 
           {
