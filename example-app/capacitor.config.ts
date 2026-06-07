@@ -1,4 +1,8 @@
-{
+import type { CapacitorConfig } from '@capacitor/cli';
+
+import pkg from './package.json';
+
+const config: CapacitorConfig = {
   "appId": "app.capgo.datepicker.example",
   "appName": "Date Picker Example",
   "webDir": "dist",
@@ -12,7 +16,9 @@
       "autoSplashscreen": true,
       "directUpdate": "always",
       "defaultChannel": "production",
-      "version": "8.0.2"
+      "version": pkg.version
     }
   }
-}
+};
+
+export default config;
