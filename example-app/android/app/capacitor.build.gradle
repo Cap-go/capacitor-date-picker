@@ -11,6 +11,7 @@ apply from: "../capacitor-cordova-android-plugins/cordova.variables.gradle"
 dependencies {
     implementation project(':capgo-capacitor-date-picker')
     implementation project(':capgo-capacitor-updater')
+    implementation project(':capacitor-splash-screen')
 
 }
 
