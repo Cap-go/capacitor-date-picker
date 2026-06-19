@@ -1,6 +1,6 @@
 {
   "name": "@capgo/capacitor-date-picker",
-  "version": "8.1.4",
+  "version": "8.1.5",
   "description": "Native Capacitor date picker for iOS, Android, and web with fixes for long-standing community issues.",
   "main": "dist/plugin.cjs.js",
   "module": "dist/esm/index.js",
