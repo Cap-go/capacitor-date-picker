@@ -4,7 +4,7 @@ import pkg from './package.json';
 
 const config: CapacitorConfig = {
   appId: 'app.capgo.datepicker.example',
-  appName: 'Date Picker Example',
+  appName: '@capgo/capacitor-date-picker',
   webDir: 'dist',
   plugins: {
     SplashScreen: {
