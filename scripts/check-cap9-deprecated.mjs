@@ -26,6 +26,10 @@ const SKIP_DIRS = new Set([
   "example-app",
 ]);
 
+/** Cap 9 bridge call management (not removed on Plugin). */
+const BRIDGE_SAVED_CALL_LINE =
+  /\b(getBridge\(\)|bridge|\w+\.bridge)\??\.(saveCall|getSavedCall|freeSavedCall|releaseCall)\s*\(/;
+
 /** @type {{ id: string, pattern: RegExp, exts: string[], ignoreLine?: RegExp }[]} */
 const RULES = [
   {
@@ -47,21 +51,25 @@ const RULES = [
     id: "saveCall",
     pattern: /\bsaveCall\s*\(/,
     exts: [".java", ".kt", ".swift"],
+    ignoreLine: BRIDGE_SAVED_CALL_LINE,
   },
   {
     id: "getSavedCall",
     pattern: /\bgetSavedCall\s*\(/,
     exts: [".java", ".kt", ".swift"],
+    ignoreLine: BRIDGE_SAVED_CALL_LINE,
   },
   {
     id: "freeSavedCall",
     pattern: /\bfreeSavedCall\s*\(/,
     exts: [".java", ".kt", ".swift"],
+    ignoreLine: BRIDGE_SAVED_CALL_LINE,
   },
   {
     id: "releaseCall",
     pattern: /\breleaseCall\s*\(/,
     exts: [".java", ".kt", ".swift"],
+    ignoreLine: BRIDGE_SAVED_CALL_LINE,
   },
   {
     id: "pluginRequestPermission",
@@ -215,7 +223,7 @@ if (!cap.android && !cap.ios) {
   process.exit(0);
 }
 
-const scanRoots = collectScanRoots(pluginDir, cap);
+const scanRoots = collectScanRoots(pluginDir, pkg);
 const allExts = [...new Set(RULES.flatMap((r) => r.exts))];
 const files = [];
 for (const root of scanRoots) {
