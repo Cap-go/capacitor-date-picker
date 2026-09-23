@@ -5,7 +5,7 @@ on:
     branches:
       - renovate/**
   pull_request:
-    branches: [ main ]
+    branches: [ main, lts-v7 ]
   workflow_call:  # Allow this workflow to be called by other workflows
 
 jobs:
@@ -25,8 +25,9 @@ jobs:
       - name: Enforce capacitor-swift-pm version
         run: |
           set -euo pipefail
-          if ! grep -Eq 'https://github.com/ionic-team/capacitor-swift-pm\.git"[[:space:]]*,[[:space:]]*from:[[:space:]]*"8\.0\.0"' Package.swift; then
-            echo "Expected capacitor-swift-pm to be pinned to 8.0.0 in Package.swift"
+          MAJOR=$(awk -F'"' '/"version":/{print $4; exit}' package.json | cut -d. -f1)
+          if ! grep -Eq "https://github.com/ionic-team/capacitor-swift-pm\\.git\"[[:space:]]*,[[:space:]]*from:[[:space:]]*\"${MAJOR}\\.0\\.0\"" Package.swift; then
+            echo "Expected capacitor-swift-pm to be pinned to ${MAJOR}.0.0 in Package.swift"
             exit 1
           fi
   build_android:

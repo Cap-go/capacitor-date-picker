@@ -1,6 +1,6 @@
 {
   "name": "@capgo/capacitor-date-picker",
-  "version": "8.1.7",
+  "version": "7.1.7",
   "description": "Native Capacitor date picker for iOS, Android, and web with fixes for long-standing community issues.",
   "main": "dist/plugin.cjs.js",
   "module": "dist/esm/index.js",
@@ -55,11 +55,11 @@
     "changelog:ai": "node scripts/generate-ai-changelog.mjs"
   },
   "devDependencies": {
-    "@capacitor/android": "^8.3.4",
-    "@capacitor/cli": "^8.3.4",
-    "@capacitor/core": "^8.3.4",
+    "@capacitor/android": "^7.6.9",
+    "@capacitor/cli": "^7.6.9",
+    "@capacitor/core": "^7.6.9",
     "@capacitor/docgen": "^0.3.1",
-    "@capacitor/ios": "^8.3.4",
+    "@capacitor/ios": "^7.6.9",
     "@eslint/js": "^10.0.1",
     "@ionic/prettier-config": "^4.0.0",
     "@ionic/swiftlint-config": "^2.0.0",
@@ -78,7 +78,7 @@
     "typescript-eslint": "^8.59.4"
   },
   "peerDependencies": {
-    "@capacitor/core": ">=8.0.0"
+    "@capacitor/core": ">=7.0.0 <8.0.0"
   },
   "prettier": "@ionic/prettier-config",
   "swiftlint": "@ionic/swiftlint-config",
