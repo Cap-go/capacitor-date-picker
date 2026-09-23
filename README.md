@@ -2,13 +2,13 @@
 
 <a href="https://capgo.app/"><img src="https://capgo.app/readme-banner.svg?repo=Cap-go/capacitor-date-picker" alt="Capgo - Instant updates for Capacitor" /></a>
 
-Native date, time, date-time, year-month, and range picker for Capacitor 8 on iOS, Android, and web.
+Native date, time, date-time, year-month, and range picker for Capacitor 7 on iOS, Android, and web.
 
 This is Capgo's maintained alternative to `@capacitor-community/date-picker`. The main difference is maintenance speed: we listen to community reports, fix issues fast, and ship updates instead of leaving long-standing GitHub issues open.
 
 ## What We Fixed
 
-- Capacitor 8 support.
+- Capacitor 7 LTS support.
 - Web implementation with the same `present()` API.
 - Programmatic `hide()`.
 - Dialog title support.
@@ -56,9 +56,11 @@ Use the `capacitor-plugins` skill from `cap-go/capacitor-skills` to install the 
 If you prefer Manual Setup, install the plugin by running the following commands and follow the platform-specific instructions below:
 
 ```bash
-npm install @capgo/capacitor-date-picker
+npm install @capgo/capacitor-date-picker@7
 npx cap sync
 ```
+
+> **Capacitor 8+:** use `@capgo/capacitor-date-picker` (latest) on the `main` branch line.
 
 ## Usage
 

@@ -11,10 +11,10 @@ let package = Package(
             targets: ["CapApp-SPM"])
     ],
     dependencies: [
-        .package(url: "https://github.com/ionic-team/capacitor-swift-pm.git", exact: "8.3.4"),
-        .package(name: "CapgoCapacitorDatePicker", path: "../../../node_modules/.bun/@capgo+capacitor-date-picker@file+../node_modules/@capgo/capacitor-date-picker"),
-        .package(name: "CapgoCapacitorUpdater", path: "../../../node_modules/.bun/@capgo+capacitor-updater@8.47.4+33da1c2fb16abc29/node_modules/@capgo/capacitor-updater"),
-        .package(name: "CapacitorSplashScreen", path: "../../../node_modules/.bun/@capacitor+splash-screen@8.0.1+33da1c2fb16abc29/node_modules/@capacitor/splash-screen")
+        .package(url: "https://github.com/ionic-team/capacitor-swift-pm.git", from: "7.0.0"),
+        .package(name: "CapgoCapacitorDatePicker", path: "../../../node_modules/@capgo/capacitor-date-picker"),
+        .package(name: "CapgoCapacitorUpdater", path: "../../../node_modules/@capgo/capacitor-updater"),
+        .package(name: "CapacitorSplashScreen", path: "../../../node_modules/@capacitor/splash-screen")
     ],
     targets: [
         .target(
