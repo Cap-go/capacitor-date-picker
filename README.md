@@ -17,7 +17,7 @@ Show the native date and time picker from your Capacitor app on iOS and Android,
 
 ## Key features
 
-- **Picker modes**: `date`, `time`, `dateAndTime`, `countDownTimer`, `yearAndMonth` and `range`.
+- **Picker modes**: `date`, `time`, `dateAndTime`, `countDownTimer`, `yearAndMonth` (iOS and web) and `range`.
 - **Range picking**: `presentRange()` returns a start and end date.
 - **Customization**: `locale`, light or dark `theme`, and `minuteStep` for time pickers.
 - **Control**: `present()` opens the picker and `hide()` closes it.
