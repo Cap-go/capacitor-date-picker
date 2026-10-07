@@ -1,6 +1,27 @@
 # @capgo/capacitor-date-picker
 
-<a href="https://capgo.app/"><img src="https://capgo.app/readme-banner.svg?repo=Cap-go/capacitor-date-picker" alt="Capgo - Instant updates for Capacitor" /></a>
+Show the native date and time picker from your Capacitor app on iOS and Android, with a web fallback. Pick dates, times, year and month, or a date range with one call.
+
+<a href="https://capgo.app/?ref=plugin_date_picker"><img src="https://capgo.app/readme-banner.svg?repo=Cap-go/capacitor-date-picker" alt="Capgo - Instant updates for Capacitor" /></a>
+
+<div align="center">
+  <p><b>Capgo</b>: open-source live updates for Ionic and Capacitor apps. Ship OTA fixes and features instantly, without waiting for app store review.</p>
+  <h2><a href="https://capgo.app/register/?ref=plugin_date_picker">➡️ Get started for free</a></h2>
+  <p>14-day unlimited free trial. No credit card required</p>
+  <p><a href="https://capgo.app/consulting/?ref=plugin_date_picker">Missing a feature? We'll build the plugin for you 💪</a></p>
+</div>
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/Cap-go/capacitor-date-picker/main/screenshots/demo/ios-date-picker-demo.webp" alt="Animated iOS demo showing the native date picker opening, selecting a date, and closing" width="300" />
+</p>
+
+## Key features
+
+- **Picker modes**: `date`, `time`, `dateAndTime`, `countDownTimer`, `yearAndMonth` and `range`.
+- **Range picking**: `presentRange()` returns a start and end date.
+- **Customization**: `locale`, light or dark `theme`, and `minuteStep` for time pickers.
+- **Control**: `present()` opens the picker and `hide()` closes it.
+- **Platforms**: iOS, Android and Web. Native pickers on iOS and Android, browser fallback on web.
 
 Native date, time, date-time, year-month, and range picker for Capacitor 8 on iOS, Android, and web.
 
