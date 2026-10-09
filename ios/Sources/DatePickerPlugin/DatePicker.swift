@@ -21,6 +21,7 @@ final class DatePickerView: UIView {
     private let blur = UIVisualEffectView(effect: UIBlurEffect(style: .dark))
     private lazy var bottomConstraint = panel.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor)
     private lazy var centerConstraint = panel.centerYAnchor.constraint(equalTo: centerYAnchor)
+    private var pickerFontColor: UIColor?
 
     init(options: DatePickerOptions) {
         self.options = options
@@ -55,6 +56,13 @@ final class DatePickerView: UIView {
             self.panel.alpha = 1
             self.panel.transform = .identity
             self.blur.alpha = 1
+        }
+    }
+
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        if let pickerFontColor {
+            DatePickerTheming.applyFontColor(pickerFontColor, to: picker)
         }
     }
 
@@ -199,8 +207,9 @@ final class DatePickerView: UIView {
 
         overrideUserInterfaceStyle = dark ? .dark : .light
         picker.overrideUserInterfaceStyle = dark ? .dark : .light
-        if let fontColor = UIColor(hex: options.fontColor) {
-            picker.tintColor = fontColor
+        pickerFontColor = UIColor(hex: options.fontColor)
+        if let pickerFontColor {
+            DatePickerTheming.applyFontColor(pickerFontColor, to: picker)
         }
 
         panel.backgroundColor = panelBackground

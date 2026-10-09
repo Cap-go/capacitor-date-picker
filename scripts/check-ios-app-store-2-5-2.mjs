@@ -28,14 +28,14 @@ const SKIP_DIRS = new Set([
 
 /** @type {{ id: string, pattern: RegExp }[]} */
 const RULES = [
-  { id: "NSSelectorFromString", pattern: /\bNSSelectorFromString\s*\(/ },
-  { id: "performSelector", pattern: /\bperformSelector\s*\(/ },
-  { id: "NSClassFromString", pattern: /\bNSClassFromString\s*\(/ },
-  { id: "methodSwizzling", pattern: /swizzl/i },
-  { id: "dlopen", pattern: /\bdlopen\s*\(/ },
-  { id: "dlsym", pattern: /\bdlsym\s*\(/ },
-  { id: "kvcSetValueForKey", pattern: /\.setValue\s*\([^,]+,\s*forKey:/ },
-  { id: "uidatePickerTextColorKVC", pattern: /forKey:\s*"textColor"/ },
+  { id: "NSSelectorFromString", pattern: /\bNSSelectorFromString\s*\(/g },
+  { id: "performSelector", pattern: /\bperformSelector\s*\(/g },
+  { id: "NSClassFromString", pattern: /\bNSClassFromString\s*\(/g },
+  { id: "methodSwizzling", pattern: /swizzl/gi },
+  { id: "dlopen", pattern: /\bdlopen\s*\(/g },
+  { id: "dlsym", pattern: /\bdlsym\s*\(/g },
+  { id: "kvcSetValueForKey", pattern: /\.setValue\s*\([\s\S]*?forKey:/g },
+  { id: "uidatePickerTextColorKVC", pattern: /forKey:\s*"textColor"/g },
 ];
 
 function walkSwiftFiles(rootDir) {
@@ -64,16 +64,25 @@ function walkSwiftFiles(rootDir) {
   return out;
 }
 
+function lineNumberAtIndex(text, index) {
+  return text.slice(0, index).split(/\r?\n/).length;
+}
+
+function lineTextAt(text, lineNumber) {
+  const lines = text.split(/\r?\n/);
+  return (lines[lineNumber - 1] ?? "").trim();
+}
+
 function scanFile(filePath) {
   const txt = fs.readFileSync(filePath, "utf8");
-  const lines = txt.split(/\r?\n/);
   const hits = [];
-  for (let i = 0; i < lines.length; i++) {
-    const line = lines[i];
-    for (const rule of RULES) {
-      if (rule.pattern.test(line)) {
-        hits.push({ rule: rule.id, line: i + 1, text: line.trim() });
-      }
+  for (const rule of RULES) {
+    const pattern = new RegExp(rule.pattern.source, rule.pattern.flags);
+    let match = pattern.exec(txt);
+    while (match) {
+      const line = lineNumberAtIndex(txt, match.index);
+      hits.push({ rule: rule.id, line, text: lineTextAt(txt, line) });
+      match = pattern.exec(txt);
     }
   }
   return hits;

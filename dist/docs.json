@@ -178,7 +178,7 @@
         {
           "name": "fontColor",
           "tags": [],
-          "docs": "Picker accent color on iOS (`UIDatePicker.tintColor`).\n\nApple does not expose per-label colors for wheel-style pickers; use `theme` for light/dark\nand expect accent/highlight coloring rather than full text recoloring on every style.",
+          "docs": "Picker label color on iOS (`UIDatePicker.tintColor` and `UILabel.textColor` in the picker view hierarchy).",
           "complexTypes": [],
           "type": "string | undefined"
         },
