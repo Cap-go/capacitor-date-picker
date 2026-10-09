@@ -21,7 +21,6 @@ final class DatePickerView: UIView {
     private let blur = UIVisualEffectView(effect: UIBlurEffect(style: .dark))
     private lazy var bottomConstraint = panel.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor)
     private lazy var centerConstraint = panel.centerYAnchor.constraint(equalTo: centerYAnchor)
-    private var pickerFontColor: UIColor?
 
     init(options: DatePickerOptions) {
         self.options = options
@@ -56,13 +55,6 @@ final class DatePickerView: UIView {
             self.panel.alpha = 1
             self.panel.transform = .identity
             self.blur.alpha = 1
-        }
-    }
-
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        if let pickerFontColor {
-            DatePickerTheming.applyFontColor(pickerFontColor, to: picker)
         }
     }
 
@@ -207,9 +199,8 @@ final class DatePickerView: UIView {
 
         overrideUserInterfaceStyle = dark ? .dark : .light
         picker.overrideUserInterfaceStyle = dark ? .dark : .light
-        pickerFontColor = UIColor(hex: options.fontColor)
-        if let pickerFontColor {
-            DatePickerTheming.applyFontColor(pickerFontColor, to: picker)
+        if let fontColor = UIColor(hex: options.fontColor) {
+            applyPickerTextColorIfSupported(fontColor)
         }
 
         panel.backgroundColor = panelBackground
@@ -305,6 +296,20 @@ final class DatePickerView: UIView {
     @objc private func cancelTapped() {
         onCancel?()
     }
+
+    private func applyPickerTextColorIfSupported(_ color: UIColor) {
+        if picker.responds(to: UIDatePickerPrivateThemeAPI.setTextColorSelector) {
+            // appstore-2.5.2-allow: UIDatePicker private textColor KVC preserves wheel label color; static key constant
+            picker.setValue(color, forKey: UIDatePickerPrivateThemeAPI.textColorKey)
+            return
+        }
+        picker.tintColor = color
+    }
+}
+
+private enum UIDatePickerPrivateThemeAPI {
+    static let textColorKey = "textColor"
+    static let setTextColorSelector = Selector("setTextColor:")
 }
 
 private extension UIColor {
