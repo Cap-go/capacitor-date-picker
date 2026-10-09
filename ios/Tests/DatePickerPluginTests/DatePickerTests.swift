@@ -7,6 +7,12 @@ class DatePickerTests: XCTestCase {
         XCTAssertEqual("ios", implementation.getPluginVersion())
     }
 
+    func testFontColorOptionIsStoredOnIosOptions() {
+        let options = DatePickerOptions()
+        options.fontColor = "#FF5500"
+        XCTAssertEqual("#FF5500", options.fontColor)
+    }
+
     func testMomentStyleDateFormatDoesNotShiftDateOnlyValues() throws {
         let options = DatePickerOptions()
         options.format = "YYYY-MM-DD"

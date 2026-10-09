@@ -200,7 +200,7 @@ final class DatePickerView: UIView {
         overrideUserInterfaceStyle = dark ? .dark : .light
         picker.overrideUserInterfaceStyle = dark ? .dark : .light
         if let fontColor = UIColor(hex: options.fontColor) {
-            picker.setValue(fontColor, forKey: "textColor")
+            picker.tintColor = fontColor
         }
 
         panel.backgroundColor = panelBackground

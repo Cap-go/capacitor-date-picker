@@ -87,6 +87,12 @@ export interface DatePickerIosOptions extends DatePickerBaseOptions {
   titleFontColor?: string;
   titleBgColor?: string;
   bgColor?: string;
+  /**
+   * Picker accent color on iOS (`UIDatePicker.tintColor`).
+   *
+   * Apple does not expose per-label colors for wheel-style pickers; use `theme` for light/dark
+   * and expect accent/highlight coloring rather than full text recoloring on every style.
+   */
   fontColor?: string;
   buttonBgColor?: string;
   buttonFontColor?: string;
