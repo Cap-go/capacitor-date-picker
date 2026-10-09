@@ -178,7 +178,7 @@
         {
           "name": "fontColor",
           "tags": [],
-          "docs": "Picker text color on iOS (wheel labels and inline text).",
+          "docs": "Picker text color on iOS. Uses private `textColor` KVC when supported; otherwise\nfalls back to `tintColor` (accent only, not guaranteed wheel label text).",
           "complexTypes": [],
           "type": "string | undefined"
         },
