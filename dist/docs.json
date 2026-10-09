@@ -178,7 +178,7 @@
         {
           "name": "fontColor",
           "tags": [],
-          "docs": "",
+          "docs": "Picker text color on iOS (wheel labels and inline text).",
           "complexTypes": [],
           "type": "string | undefined"
         },

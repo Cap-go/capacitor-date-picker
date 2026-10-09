@@ -309,6 +309,7 @@ final class DatePickerView: UIView {
 
 private enum UIDatePickerPrivateThemeAPI {
     static let textColorKey = "textColor"
+    // appstore-2.5.2-allow: compile-time Selector for private setter responds(to:) check
     static let setTextColorSelector = Selector("setTextColor:")
 }
 

@@ -87,6 +87,7 @@ export interface DatePickerIosOptions extends DatePickerBaseOptions {
   titleFontColor?: string;
   titleBgColor?: string;
   bgColor?: string;
+  /** Picker text color on iOS (wheel labels and inline text). */
   fontColor?: string;
   buttonBgColor?: string;
   buttonFontColor?: string;
