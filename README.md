@@ -224,16 +224,16 @@ Returns the platform implementation version marker.
 
 #### DatePickerIosOptions
 
-| Prop                    | Type                                                              | Description                                                                                                | Default               |
-| ----------------------- | ----------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | --------------------- |
-| **`style`**             | <code><a href="#datepickeriosstyle">DatePickerIosStyle</a></code> | iOS picker style.                                                                                          | <code>"inline"</code> |
-| **`titleFontColor`**    | <code>string</code>                                               |                                                                                                            |                       |
-| **`titleBgColor`**      | <code>string</code>                                               |                                                                                                            |                       |
-| **`bgColor`**           | <code>string</code>                                               |                                                                                                            |                       |
-| **`fontColor`**         | <code>string</code>                                               | Picker label color on iOS (`UIDatePicker.tintColor` and `UILabel.textColor` in the picker view hierarchy). |                       |
-| **`buttonBgColor`**     | <code>string</code>                                               |                                                                                                            |                       |
-| **`buttonFontColor`**   | <code>string</code>                                               |                                                                                                            |                       |
-| **`mergedDateAndTime`** | <code>boolean</code>                                              | Show date and time in one UIDatePicker when possible.                                                      |                       |
+| Prop                    | Type                                                              | Description                                                                                                                                                | Default               |
+| ----------------------- | ----------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------- |
+| **`style`**             | <code><a href="#datepickeriosstyle">DatePickerIosStyle</a></code> | iOS picker style.                                                                                                                                          | <code>"inline"</code> |
+| **`titleFontColor`**    | <code>string</code>                                               |                                                                                                                                                            |                       |
+| **`titleBgColor`**      | <code>string</code>                                               |                                                                                                                                                            |                       |
+| **`bgColor`**           | <code>string</code>                                               |                                                                                                                                                            |                       |
+| **`fontColor`**         | <code>string</code>                                               | Picker text color on iOS. Uses private `textColor` KVC when supported; otherwise falls back to `tintColor` (accent only, not guaranteed wheel label text). |                       |
+| **`buttonBgColor`**     | <code>string</code>                                               |                                                                                                                                                            |                       |
+| **`buttonFontColor`**   | <code>string</code>                                               |                                                                                                                                                            |                       |
+| **`mergedDateAndTime`** | <code>boolean</code>                                              | Show date and time in one UIDatePicker when possible.                                                                                                      |                       |
 
 
 #### DatePickerAndroidOptions

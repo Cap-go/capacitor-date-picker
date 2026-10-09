@@ -73,7 +73,8 @@ export interface DatePickerIosOptions extends DatePickerBaseOptions {
     titleBgColor?: string;
     bgColor?: string;
     /**
-     * Picker label color on iOS (`UIDatePicker.tintColor` and `UILabel.textColor` in the picker view hierarchy).
+     * Picker text color on iOS. Uses private `textColor` KVC when supported; otherwise
+     * falls back to `tintColor` (accent only, not guaranteed wheel label text).
      */
     fontColor?: string;
     buttonBgColor?: string;
