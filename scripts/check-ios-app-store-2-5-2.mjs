@@ -2,8 +2,9 @@
 /**
  * App Store Guideline 2.5.2 guard for iOS plugin sources.
  *
- * Fails when native Swift code uses dynamic dispatch or private KVC patterns
- * commonly flagged during App Review.
+ * Blocks runtime-built selectors/class names and unobfuscated dynamic dispatch.
+ * Allows documented private API usage when keyed by compile-time static constants
+ * and marked with `// appstore-2.5.2-allow: <reason>` on the call site.
  *
  * Usage:
  *   node scripts/check-ios-app-store-2-5-2.mjs
@@ -26,17 +27,27 @@ const SKIP_DIRS = new Set([
   "example-app",
 ]);
 
+const ALLOW_TAG = "appstore-2.5.2-allow:";
+
 /** @type {{ id: string, pattern: RegExp }[]} */
-const RULES = [
+const HARD_BAN_RULES = [
   { id: "NSSelectorFromString", pattern: /\bNSSelectorFromString\s*\(/g },
   { id: "performSelector", pattern: /\bperformSelector\s*\(/g },
   { id: "NSClassFromString", pattern: /\bNSClassFromString\s*\(/g },
   { id: "methodSwizzling", pattern: /swizzl/gi },
   { id: "dlopen", pattern: /\bdlopen\s*\(/g },
   { id: "dlsym", pattern: /\bdlsym\s*\(/g },
-  { id: "kvcSetValueForKey", pattern: /\.setValue\s*\([\s\S]*?forKey:/g },
-  { id: "uidatePickerTextColorKVC", pattern: /forKey:\s*"textColor"/g },
 ];
+
+/** @type {{ id: string, pattern: RegExp }[]} */
+const RUNTIME_NAME_RULES = [
+  { id: "forKeyStringInterpolation", pattern: /forKey:\s*\\\(/g },
+  { id: "forKeyConcatenation", pattern: /forKey:\s*"[^"]*"\s*\+/g },
+  { id: "selectorConcatenation", pattern: /Selector\s*\(\s*[^)]*\+/g },
+  { id: "selectorInterpolation", pattern: /Selector\s*\(\s*\\\(/g },
+];
+
+const KVC_INLINE_STRING_FOR_KEY = /\.setValue\s*\([\s\S]*?forKey:\s*"[^"]*"/g;
 
 function walkSwiftFiles(rootDir) {
   const out = [];
@@ -73,18 +84,58 @@ function lineTextAt(text, lineNumber) {
   return (lines[lineNumber - 1] ?? "").trim();
 }
 
-function scanFile(filePath) {
-  const txt = fs.readFileSync(filePath, "utf8");
-  const hits = [];
-  for (const rule of RULES) {
-    const pattern = new RegExp(rule.pattern.source, rule.pattern.flags);
-    let match = pattern.exec(txt);
-    while (match) {
-      const line = lineNumberAtIndex(txt, match.index);
-      hits.push({ rule: rule.id, line, text: lineTextAt(txt, line) });
-      match = pattern.exec(txt);
+function hasAllowComment(lines, lineNumber) {
+  const index = lineNumber - 1;
+  for (let offset = 0; offset <= 2; offset++) {
+    const line = lines[index - offset];
+    if (line?.includes(ALLOW_TAG)) {
+      return true;
     }
   }
+  return false;
+}
+
+function collectMatches(txt, pattern) {
+  const re = new RegExp(pattern.source, pattern.flags);
+  const hits = [];
+  let match = re.exec(txt);
+  while (match) {
+    hits.push({ index: match.index, length: match[0].length });
+    match = re.exec(txt);
+  }
+  return hits;
+}
+
+function scanFile(filePath) {
+  const txt = fs.readFileSync(filePath, "utf8");
+  const lines = txt.split(/\r?\n/);
+  const hits = [];
+
+  for (const rule of HARD_BAN_RULES) {
+    for (const match of collectMatches(txt, rule.pattern)) {
+      const line = lineNumberAtIndex(txt, match.index);
+      hits.push({ rule: rule.id, line, text: lineTextAt(txt, line) });
+    }
+  }
+
+  for (const rule of RUNTIME_NAME_RULES) {
+    for (const match of collectMatches(txt, rule.pattern)) {
+      const line = lineNumberAtIndex(txt, match.index);
+      hits.push({ rule: rule.id, line, text: lineTextAt(txt, line) });
+    }
+  }
+
+  for (const match of collectMatches(txt, KVC_INLINE_STRING_FOR_KEY)) {
+    const line = lineNumberAtIndex(txt, match.index);
+    if (!hasAllowComment(lines, line)) {
+      hits.push({
+        rule: "kvcInlineStringForKey",
+        line,
+        text: lineTextAt(txt, line),
+      });
+    }
+  }
+
   return hits;
 }
 

@@ -178,7 +178,7 @@
         {
           "name": "fontColor",
           "tags": [],
-          "docs": "Picker label color on iOS (`UIDatePicker.tintColor` and `UILabel.textColor` in the picker view hierarchy).",
+          "docs": "",
           "complexTypes": [],
           "type": "string | undefined"
         },

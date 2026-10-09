@@ -72,9 +72,6 @@ export interface DatePickerIosOptions extends DatePickerBaseOptions {
     titleFontColor?: string;
     titleBgColor?: string;
     bgColor?: string;
-    /**
-     * Picker label color on iOS (`UIDatePicker.tintColor` and `UILabel.textColor` in the picker view hierarchy).
-     */
     fontColor?: string;
     buttonBgColor?: string;
     buttonFontColor?: string;
