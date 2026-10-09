@@ -9,6 +9,8 @@
  * Usage:
  *   node scripts/check-ios-app-store-2-5-2.mjs
  *   node scripts/check-ios-app-store-2-5-2.mjs --self-test
+ *
+ * Self-test fixtures cover implicit-self KVC, paren-in-string boundaries, and runtime keys.
  */
 
 import fs from "node:fs";
